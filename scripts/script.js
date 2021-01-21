@@ -2,13 +2,12 @@ import http from 'k6/http';
 import { sleep, check, group } from 'k6';
 
 const data = JSON.parse(open("OrganizationData.json"));
-console.log(data[1].Username);
 
 export let options = {
   stages: [
-    { duration: "2s", target: 5 },
-    { duration: "5s", target: 5 },
-    { duration: "5s", target: 0}
+    { duration: "20s", target: 50 },
+    { duration: "20s", target: 50 },
+    { duration: "20s", target: 0}
   ]
 }
 /*
@@ -18,7 +17,7 @@ export function setup() {
 export default function () {
   let response;
 
-  let user = data[__VU];
+  let user = data[__VU % 50];
 
   const vars = {};
   
