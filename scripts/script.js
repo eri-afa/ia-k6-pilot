@@ -1,28 +1,38 @@
 import http from 'k6/http';
 import { sleep, check, group } from 'k6';
+import { Counter, Trend, Gauge, Rate } from 'k6/metrics';
+
+let testGauge = new Gauge('test_gauge');
+let testCounter = new Counter('test_counter');
+let testTrend = new Trend('test_trend');
+let testRate = new Rate('test_rate');
 
 const data = JSON.parse(open("OrganizationData.json"));
 
 export let options = {
   stages: [
-    { duration: "20s", target: 50 },
-    { duration: "20s", target: 50 },
-    { duration: "20s", target: 0}
-  ]
+    { duration: "5s", target: 5 },
+    { duration: "10s", target: 5 },
+    { duration: "5s", target: 0}
+  ], 
+  thresholds: {
+    'test_counter': [ {threshold: 'count<30000.0', abortOnFail: true }]
+  }
 }
-/*
-export function setup() {
-}
-*/
+
 export default function () {
   let response;
 
-  let user = data[__VU % 50];
+  let user = data[__VU % 5];
 
   const vars = {};
   
   group("page_1 - https://ia.dev.ia.afaforsakring.se/", function () {
     response = http.get("https://ia.dev.ia.afaforsakring.se/authentication");
+    testGauge.add(response.status);
+    testCounter.add(response.timings.duration);
+    testTrend.add(response.timings.duration);
+    testRate.add(response.status);
 
     vars["KeepSSOCookie"] = response
       .html()
@@ -45,6 +55,10 @@ export default function () {
         __RequestVerificationToken: `${vars["__RequestVerificationToken"]}`,
       }
     );
+    testGauge.add(response.status);
+    testCounter.add(response.timings.duration);
+    testTrend.add(response.timings.duration);
+    testRate.add(response.status);
 
     response = http.get(
       "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/IaResource/sv-SE/Startpage"
