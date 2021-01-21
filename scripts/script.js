@@ -1,7 +1,7 @@
 import http from 'k6/http';
 import { sleep, check, group } from 'k6';
 
-const data = JSON.parse(open("Ptest.json"));
+const data = JSON.parse(open("OrganizationData.json"));
 console.log(data[1].Username);
 
 export let options = {
