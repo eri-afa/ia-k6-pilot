@@ -93,7 +93,7 @@ export default function () {
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/IaHeader/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/5/00000000-0000-0000-0000-000000000000"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/IaHeader/${user.UserId}/sv-SE/${user.OrganisationGuid}/5/00000000-0000-0000-0000-000000000000`
     );
 
     response = http.get(
@@ -109,27 +109,27 @@ export default function () {
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardOpenRisks/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/true"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardOpenRisks/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/Riskreduction/" + user.UserId + "/" + user.OrganisationGuid + "/1610614418353/1611305618353/true"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/Riskreduction/${user.UserId}/${user.OrganisationGuid}/1610614418353/1611305618353/true`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/5"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardTypesSummary/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/l7/1610614418406/1611305618406/false/true"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardTypesSummary/${user.UserId}/sv-SE/${user.OrganisationGuid}/l7/1610614418406/1611305618406/false/true`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardSafetyData/" + user.UserId + "/" + user.OrganisationGuid + "/1610614418428/1611305618428/true"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardSafetyData/${user.UserId}/${user.OrganisationGuid}/1610614418428/1611305618428/true`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/TodoList/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/true"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/TodoList/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
     );
 
     response = http.get(
@@ -157,7 +157,7 @@ export default function () {
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/" + user.UserId + "/sv-SE/" + user.OrganisationGuid + "/5"
+      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
     );
   });
 
