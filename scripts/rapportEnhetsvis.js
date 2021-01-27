@@ -20,19 +20,7 @@ export default function main() {
   let user = data[__VU % MAXUSERS];
 
   group(
-    "Log in",
-    function () {
-      response = http.get(
-        "https://" + __ENV.MY_HOSTNAME + "/PreventionIA/IA/Pages/Reports/RapportEnhetsvis.aspx"
-      );
-      check(response, {
-        'Response OK': (r) => r.status === 200,
-      });
-    }
-  );
-
-  group(
-    "Rapport Enhetsvis",
+    "Log in och Rapport Enhetsvis",
     function () {
       response = http.post(
         "https://" + __ENV.MY_HOSTNAME + "/Authentication?returnurl=%2FPreventionIA%2FIA%2FPages%2FReports%2FRapportEnhetsvis.aspx",
