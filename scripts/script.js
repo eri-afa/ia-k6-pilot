@@ -15,13 +15,13 @@ let testRate = new Rate('auth_status_rate');
 const data = JSON.parse(open("OrganizationData.json"));
 
 // Number of users created in seed (length of data)
-const MAXUSERS = 3;
+const MAXUSERS = 5;
 
 export let options = {
   stages: [
-    { duration: "3s", target: MAXUSERS },
     { duration: "5s", target: MAXUSERS },
-    { duration: "2s", target: 0}
+    { duration: "10s", target: MAXUSERS },
+    { duration: "5s", target: 0}
   ], 
   thresholds: {
     // Will fail test if the 95th percentile of duration of loading the login page
@@ -55,7 +55,7 @@ export default function () {
 
     // Will let us know if loading login page is successful.
     check(response, {
-      'Login page, Status code 200': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     vars["KeepSSOCookie"] = response
@@ -76,11 +76,11 @@ export default function () {
         KeepSSOCookie: `${vars["KeepSSOCookie"]}`,
         UserName: `${user.username}`,
         Password: `${user.password}`,
-        __RequestVerificationToken: `${vars["__RequestVerificationToken"]}`,
+        __RequestVerificationToken: `${vars["__RequestVerificationToken"]}`
       }
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
   });
 
@@ -89,183 +89,181 @@ export default function () {
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/IaResource/sv-SE/Startpage`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     /// Will let us know if login was successful.
     // This will give us a hint if seeding was unsuccessful.
     check(response, {
-      'Start page, Status code 200': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Header.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTime.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Safety.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Summary.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Risk.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/MyIA.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Startpage/NewsWidget.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/IaHeader/${user.userGuid}/sv-SE/${user.organisationGuid}/5/00000000-0000-0000-0000-000000000000`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/Leadtime/Occurrences/${user.organisationGuid}/sv-SE/1610614418353/1611305618353`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTimeAll.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTimeDetails.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardOpenRisks/${user.userGuid}/sv-SE/${user.organisationGuid}/true`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/Riskreduction/${user.userGuid}/${user.organisationGuid}/1610614418353/1611305618353/true`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.userGuid}/sv-SE/${user.organisationGuid}/5`
     );
-    console.log(response.status);
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardTypesSummary/${user.userGuid}/sv-SE/${user.organisationGuid}/l7/1610614418406/1611305618406/false/true`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardSafetyData/${user.userGuid}/${user.organisationGuid}/1610614418428/1611305618428/true`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/TodoList/${user.userGuid}/sv-SE/${user.organisationGuid}/true`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/News.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Favorites.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Tips.html`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Tips`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Favorites`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/News`
     );
     check(response, {
-      '1': (r) => r.status === 200,
+      'Status code OK': (r) => r.status === 200,
     });
 
     response = http.get(
       `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.userGuid}/sv-SE/${user.organisationGuid}/5`
     );
-    console.log(response.status)
-        check(response, {
-      '1': (r) => r.status === 200,
+      check(response, {
+      'Status code OK': (r) => r.status === 200,
     });
   });
 
