@@ -16,7 +16,7 @@ export let options = {
     { duration: "5s", target: 0}
   ], 
   thresholds: {
-    'test_counter': [ {threshold: 'count<30000.0', abortOnFail: true }]
+    'test_counter': [ {threshold: 'count<3000000.0', abortOnFail: true }]
   }
 }
 
@@ -27,8 +27,8 @@ export default function () {
 
   const vars = {};
   
-  group("page_1 - https://ia.dev.ia.afaforsakring.se/", function () {
-    response = http.get("https://ia.dev.ia.afaforsakring.se/authentication");
+  group(`page_1 - https://${__ENV.MY_HOSTNAME}/`, function () {
+    response = http.get(`https://${__ENV.MY_HOSTNAME}/authentication`);
     testGauge.add(response.status);
     testCounter.add(response.timings.duration);
     testTrend.add(response.timings.duration);
@@ -47,7 +47,7 @@ export default function () {
       .attr("value");
 
     response = http.post(
-      "https://ia.dev.ia.afaforsakring.se/authentication",
+      `https://${__ENV.MY_HOSTNAME}/authentication`,
       {
         KeepSSOCookie: `${vars["KeepSSOCookie"]}`,
         UserName: `${user.Username}`,
@@ -61,111 +61,111 @@ export default function () {
     testRate.add(response.status);
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/IaResource/sv-SE/Startpage"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/IaResource/sv-SE/Startpage`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/Header.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Header.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/LeadTime.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTime.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/Safety.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Safety.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/Summary.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Summary.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/Risk.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/Risk.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/MyIA.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/MyIA.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/Startpage/NewsWidget.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Startpage/NewsWidget.html`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/IaHeader/${user.UserId}/sv-SE/${user.OrganisationGuid}/5/00000000-0000-0000-0000-000000000000`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/IaHeader/${user.UserId}/sv-SE/${user.OrganisationGuid}/5/00000000-0000-0000-0000-000000000000`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/Leadtime/Occurrences/${user.OrganisationGuid}/sv-SE/1610614418353/1611305618353`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/Leadtime/Occurrences/${user.OrganisationGuid}/sv-SE/1610614418353/1611305618353`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/LeadTimeAll.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTimeAll.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/StartPage/LeadTimeDetails.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/StartPage/LeadTimeDetails.html`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardOpenRisks/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardOpenRisks/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/Riskreduction/${user.UserId}/${user.OrganisationGuid}/1610614418353/1611305618353/true`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/Riskreduction/${user.UserId}/${user.OrganisationGuid}/1610614418353/1611305618353/true`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardTypesSummary/${user.UserId}/sv-SE/${user.OrganisationGuid}/l7/1610614418406/1611305618406/false/true`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardTypesSummary/${user.UserId}/sv-SE/${user.OrganisationGuid}/l7/1610614418406/1611305618406/false/true`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaDashboardSafetyData/${user.UserId}/${user.OrganisationGuid}/1610614418428/1611305618428/true`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaDashboardSafetyData/${user.UserId}/${user.OrganisationGuid}/1610614418428/1611305618428/true`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/TodoList/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/TodoList/${user.UserId}/sv-SE/${user.OrganisationGuid}/true`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/News.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/News.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/Favorites.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Favorites.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/Sections/Views/Tips.html"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/Sections/Views/Tips.html`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Tips"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Tips`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Favorites"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/Favorites`
     );
 
     response = http.get(
-      "https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/News"
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Global/ResourceObjects/sv-SE/News`
     );
 
     response = http.get(
-      `https://ia.dev.ia.afaforsakring.se/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
+      `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.UserId}/sv-SE/${user.OrganisationGuid}/5`
     );
   });
 
   group(
-    "page_2 - https://ia.dev.ia.afaforsakring.se/PreventionIA/SystemNavigering.aspx?Utloggning=true",
+    `page_2 - https://${__ENV.MY_HOSTNAME}/PreventionIA/SystemNavigering.aspx?Utloggning=true`,
     function () {
       response = http.get(
-        "https://ia.dev.ia.afaforsakring.se/PreventionIA/SystemNavigering.aspx?Utloggning=true"
+        `https://${__ENV.MY_HOSTNAME}/PreventionIA/SystemNavigering.aspx?Utloggning=true`
       );
     }
   );
