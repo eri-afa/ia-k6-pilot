@@ -25,10 +25,8 @@ export default function main() {
       response = http.post(
         `https://${__ENV.MY_HOSTNAME}/Authentication?returnurl=%2FPreventionIA%2FIA%2FPages%2FActionPlan%2FAtgarderLista.aspx`,
         {
-          KeepSSOCookie: "",
           UserName: `${user.username}`,
           Password: `${user.password}`,
-          __RequestVerificationToken: ""
         }
       );
       check(response, {

@@ -21,15 +21,15 @@ export default function main() {
   let user = data[__VU % MAXUSERS];
 
   group(
-    "Log in och Rapport Enhetsvis",
+    "Log in och rapport enhetsvis",
     function () {
       response = http.post(
         `https://${__ENV.MY_HOSTNAME}/Authentication?returnurl=%2FPreventionIA%2FIA%2FPages%2FReports%2FRapportEnhetsvis.aspx`,
         {
-          KeepSSOCookie: "",
+          //KeepSSOCookie: "",
           UserName: `${user.username}`,
           Password: `${user.password}`,
-          __RequestVerificationToken: "",
+          //__RequestVerificationToken: "",
         }
       );
       check(response, {
