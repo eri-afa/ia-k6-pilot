@@ -3,14 +3,14 @@ import http from "k6/http";
 
 const data = JSON.parse(open("OrganizationData.json"));
 
-const MAXUSERS = 2;
+const MAXUSERS = 5;
 
 export let options = {
   setupTimeout: '10m',
   stages: [
-    { duration: "2s", target: MAXUSERS },
     { duration: "5s", target: MAXUSERS },
-    { duration: "3s", target: 0}
+    { duration: "20s", target: MAXUSERS },
+    { duration: "10s", target: 0}
   ]
 }
 
