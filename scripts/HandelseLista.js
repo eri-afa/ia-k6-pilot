@@ -21,7 +21,7 @@ export let options = {
 }
 
 // BEWARE, creating a performance test organization takes a lot of time, and this will be included
-// in the default metrics, thus affecting the test result.
+// in the default metrics, thus affecting the test result. https://github.com/loadimpact/k6/issues/891
 export function setup() {
   let params = {
     timeout: 600000
