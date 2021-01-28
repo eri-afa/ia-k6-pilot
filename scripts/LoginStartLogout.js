@@ -18,6 +18,7 @@ const data = JSON.parse(open("OrganizationData.json"));
 const MAXUSERS = 5;
 
 export let options = {
+  setupTimeout: '10m',
   stages: [
     { duration: "5s", target: MAXUSERS },
     { duration: "10s", target: MAXUSERS },

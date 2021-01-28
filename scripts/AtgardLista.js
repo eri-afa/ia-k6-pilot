@@ -6,6 +6,7 @@ const data = JSON.parse(open("OrganizationData.json"));
 const MAXUSERS = 5;
 
 export let options = {
+  setupTimeout: '10m',
   stages: [
     { duration: "5s", target: MAXUSERS },
     { duration: "20s", target: MAXUSERS },
@@ -27,8 +28,7 @@ export default function main() {
           KeepSSOCookie: "",
           UserName: `${user.username}`,
           Password: `${user.password}`,
-          __RequestVerificationToken:
-            "CfDJ8GUUjDiLYe1DgwUEt3_CV9ATKlljRNOToJ61HlFopp2DyQOQsTdjR87XP36JoUMZrrhQJFxNLZpgoM7P4PO_MehsfvkJhCj1j45S3BJ35MJT0X2iqX66eZ-MZkchQ-_GYH2sBYLT4FJV00xfYa8q9F8"
+          __RequestVerificationToken: ""
         }
       );
       check(response, {
