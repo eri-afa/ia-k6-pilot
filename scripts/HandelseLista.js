@@ -27,14 +27,14 @@ export function setup() {
     timeout: 600000
   }
   let response = http.post(`https://${__ENV.MY_HOSTNAME}/services/seedia/PerformanceTest/CreatePerformanceTestOrganisationJson?userCount=${MAXUSERS}`, '', params);
-  check(response, { 'Creation status': (r) => r.status === 201, });
+  check(response, { 'Company creation status': (r) => r.status === 201, });
   let orgdata = JSON.parse(response.body);
   return orgdata;
 }
 
 export function teardown(orgData) {
   let response = http.del(`https://${__ENV.MY_HOSTNAME}/services/seedia/IAFtg/DeleteIAFtg?organizationId=${orgData[0].organisationId}`);
-  check(response, { 'Deletion status': (r) => r.status === 204, });
+  check(response, { 'Company deletion status': (r) => r.status === 204, });
 }
 
 export default function (orgData) {
@@ -55,7 +55,7 @@ export default function (orgData) {
     ['GET', `https://${__ENV.MY_HOSTNAME}/PreventionIA/IA/api/Web/Dashboard/IaNewsWidget/${user.userGuid}/sv-SE/${user.organisationGuid}/5`, null, {}], // Always fails (?)
   ]);
   responses.forEach(resp =>{
-    const ok = check(resp, {'Micellaneous resources status code': (res) => res.status === 200,});
+    const ok = check(resp, {'Miscellaneous resources status code': (res) => res.status === 200,});
     errorRate.add(!ok);
   });
   
